@@ -4,7 +4,7 @@
 
 ------
 
-> ** Time and Space Complexity while training:
+** Time and Space Complexity while training:
 --> Time Complexity of Logistic Regression while training is O(ND) where N is the number of samples and D is the dimension of the input data. in Logistic regression we have to find a vector w and bias b such that it will help us classify the input data into two categories (2 class problem). These quantities are trained by going over each input data point and updating according to the update rules. This take time complexity O(ND).
 --> Space Complexity of Logistic Regression while training is O(ND). We need to store the input data, that is the feature vector and the output vector (X and y), as well create the vector w and bias b. This takes O(ND + N + D) space.
 
