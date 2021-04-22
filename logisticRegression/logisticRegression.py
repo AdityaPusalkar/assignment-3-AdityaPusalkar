@@ -5,12 +5,12 @@ import autograd.numpy as np
 import math
 
 class LogisticRegression():
-    def __init__(self, reg=None):
+    def __init__(self, reg=None, reg_coef=None):
         self.coef = None
         self.X_auto = None
         self.y_auto = None
         self.reg = reg
-        self.reg_coef = 0.1
+        self.reg_coef = reg_coef
         self.classes = None
         self.loss_function = None
 
@@ -45,7 +45,7 @@ class LogisticRegression():
             X_theta_sum = np.sum(X_theta_exp)
             X_theta_currnum = X_theta_exp[curr_pred]
             loss_function += np.log(X_theta_currnum/X_theta_sum)
-        return loss_function
+        return -loss_function
 
     def fit(self, X, y, n_iter, lr):
         N = len(X.index)
@@ -126,7 +126,7 @@ class LogisticRegression():
             self.y_auto = y
             mse_auto = grad(self.error_function_multiclass)
             dmse = mse_auto(curr_coeff) 
-            curr_coeff += lr*dmse
+            curr_coeff -= lr*dmse
             # print("Progress:",i/n_iter*100)
         self.coef = curr_coeff
 

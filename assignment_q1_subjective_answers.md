@@ -4,5 +4,8 @@
 
 ------
 
-> Write the answers for the subjective questions here
-
+** Accuracy for part(c) in Breast Cancer Dataset:
+Accuracy Fold 1:  0.95263
+Accuracy Fold 2:  0.97368
+Accuracy Fold 3:  0.98412
+Overall Accuracy: 0.97014
