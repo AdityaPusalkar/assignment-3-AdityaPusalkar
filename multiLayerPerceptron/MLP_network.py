@@ -1,6 +1,6 @@
 from autograd import numpy as np, elementwise_grad
-class NeuralNetwork():
 
+class MultiLayerPerceptron():
     def __init__(self):
         self.listOfLayers = []
         self.loss = None
@@ -36,8 +36,6 @@ class NeuralNetwork():
                 error = auto(output,y_train[j])
                 for layer in reversed(self.listOfLayers):
                     error = layer.backwardPass(error, learning_rate)
-
             err /= samples
-            print('(Epoch, error): (%d/%d, %f)' % (i+1, epochs, err))
 
      

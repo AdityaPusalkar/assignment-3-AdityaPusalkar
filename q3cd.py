@@ -20,7 +20,6 @@ X = scalar.transform(X)
 X = pd.DataFrame(X) # This scales data to the range 0-1 and is easier to train
 
 skf = StratifiedKFold(n_splits=4)
-skf.get_n_splits(X, y)
 
 i = 1
 ov_ac = 0
@@ -67,4 +66,5 @@ pca = PCA(n_components=2)
 X = pca.fit_transform(load_digits().data)
 plt.scatter(X[:,0],X[:,1], c=load_digits().target, cmap="Paired")
 plt.colorbar()
+plt.savefig('Plots/Q3d.png')
 plt.show()

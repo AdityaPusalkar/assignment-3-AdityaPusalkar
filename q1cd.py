@@ -5,7 +5,7 @@ from logisticRegression.logisticRegression import LogisticRegression
 from sklearn.preprocessing import MinMaxScaler 
 from sklearn.datasets import load_breast_cancer
 from metrics import *
-import math
+import math, copy
 
 np.random.seed(42)
 data = load_breast_cancer()
@@ -19,6 +19,8 @@ X = scalar.transform(X)
 X = pd.DataFrame(X) # This scales data to the range 0-1 and is easier to train
 
 acc_ov = 0
+best_accuracy = 0
+best_LR = None
 for i in range(3):
     xti = X.iloc[i*190:min(570,(i+1)*190)]
     yti = y[i*190:min(570,(i+1)*190)]
@@ -38,7 +40,15 @@ for i in range(3):
     LR.fit(xi,yi,n_iter=600, lr=7e-03)
     y_hat = LR.predict(xti)
     acc_curr = accuracy(y_hat,yti)
+    if(acc_curr>best_accuracy):
+        best_accuracy = acc_curr
+        best_LR = copy.deepcopy(LR)
     print(f'Accuracy Fold {i+1}: ', acc_curr)
     acc_ov += acc_curr
-
 print("Overall Accuracy:",acc_ov/3)
+
+print("Decision boundary for features 0 and 1:")
+LR = LogisticRegression()
+LR.fit(X[[0,1]],y,n_iter=500, lr=5e-3)
+LR.plot(np.array(X[[0,1]]), np.array(y))
+

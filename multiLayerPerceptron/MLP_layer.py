@@ -1,4 +1,3 @@
-import numpy as np 
 from autograd import numpy as np, elementwise_grad
 
 def sigmoid(x):

@@ -5,4 +5,3 @@
 ------
 
 The two files namely MLP_network.py and MLP_layer.py are used to create the Neural Network. Backpropagation done with Autograd.
-

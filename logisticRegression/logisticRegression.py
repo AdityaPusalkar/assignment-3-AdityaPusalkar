@@ -110,7 +110,6 @@ class LogisticRegression():
                     X_copy.fill(X_diff)
                     errors = np.multiply(X_copy,curr_X)
                     curr_coeff[k] += lr*errors
-            # print("Progress:",i/n_iter*100)
         self.coef = curr_coeff
 
     def fit_multiclass_autograd(self, X, y, n_iter, lr):
@@ -127,7 +126,6 @@ class LogisticRegression():
             mse_auto = grad(self.error_function_multiclass)
             dmse = mse_auto(curr_coeff) 
             curr_coeff -= lr*dmse
-            # print("Progress:",i/n_iter*100)
         self.coef = curr_coeff
 
     def predict(self, X):
@@ -156,3 +154,24 @@ class LogisticRegression():
                     pred_class=self.classes[j]
             y_hat.append(pred_class)
         return(pd.Series(y_hat))
+
+    def plot(self, X, y):
+        b = self.coef[0]
+        w1, w2 = self.coef[1], self.coef[2]
+        c = -b/w2
+        m = -w1/w2 #intercept and slope
+        xl, xr = -0.25, 1.25
+        yl, yr = -0.25, 1.25
+        xd = np.array([xl, xr])
+        yd = m*xd + c
+        plt.plot(xd, yd, 'k', lw=1, ls='--')
+        plt.fill_between(xd, yd, yl, color='tab:blue', alpha=0.2)
+        plt.fill_between(xd, yd, yr, color='tab:orange', alpha=0.2)
+        plt.scatter(*X[y==0].T, s=8, alpha=0.5)
+        plt.scatter(*X[y==1].T, s=8, alpha=0.5)
+        plt.xlim(xl, xr)
+        plt.ylim(yl, yr)
+        plt.ylabel(r'$x_2$')
+        plt.xlabel(r'$x_1$')
+        plt.savefig('Plots/Q1d.png')
+        plt.show()
